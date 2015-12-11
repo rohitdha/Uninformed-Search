@@ -11,4 +11,5 @@ One strange fact about this city is that some of the pipes which are old do not 
 
 You have to keep track of the time too. This is simple. We assume that it takes n units of time for water to flow through a pipe if the length of the pipe is n. For example if you have two pipes with length 3 and 4 in your route till now and you have started from time 2, current time will be 2 + 3 + 4 = 9.
 
-Your task is to find a route based on the availability of the pipes in a given time using search algorithms. You are given the start time that water will start flowing and then you have to report the time which water reaches the other side of the city.
+Your task is to find a route based on the availability of the pipes in a given time using <b>Search algorithms - Breadth First Search, Depth First Search, Uniform Cost Search</b>.You are given the start time that water will start flowing and then you have to report the time which water reaches the other side of the city.
+
