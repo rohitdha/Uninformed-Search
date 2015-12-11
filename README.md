@@ -18,13 +18,13 @@ Your task is to find a route based on the availability of the pipes in a given t
 
 Given a text input file. First line of this file represents the number of test cases. The next line will be the beginning of the 1st test case. Each test case ends with an empty line. Each test case consists of the following lines:
 
-* \<task\> algorithm that you are supposed to use for this case
-* \<source\> name of the source node
-* \<destinations\> names of the destination nodes
-* \<middle nodes\> names of the middle nodes
-* \<#pipes\> represents the number of pipes
-* \<graph\> represents start-end nodes, lengths and off-times of pipes
-* \<start-time\> the time when water will start flowing
+* <b>\<task\></b> algorithm that you are supposed to use for this case
+* <b>\<source\></b> name of the source node
+* <b>\<destinations\></b> names of the destination nodes
+* <b>\<middle nodes\></b> names of the middle nodes
+* <b>\<#pipes\></b> represents the number of pipes
+* <b>\<graph\></b> represents start-end nodes, lengths and off-times of pipes
+* <b>\<start-time\></b> the time when water will start flowing
 
 ### Task:
 ---------
@@ -58,3 +58,16 @@ This section contains <b>#pipes</b> number of lines. Each line in this section r
 
 It means that this pipe starts from point S , ends in point E , has the length 10, and it has 3 off-periods. It is not working from time 10 to 12, 15 to 16 and 25 to 29. Period 10-12 means that if we are at time 10, 11 or 12 we cannot use this pipe as the next pipe. Some pipes may always work. In that case, the 4th field for these pipes will be 0. Please note that the pipes are unidirectional, i.e. for a pipe that has starting point A and ending point B, the water can flow from A to B only and not in the reverse direction.
 The pipe length will be 1 for both BFS and DFS (i.e. pipe length is ignored by these algorithms and is always assumed to be 1). Also, ignore the off-periods for these algorithms, i.e. when using BFS-DFS; assume that all pipes work all the time.
+
+### Start-time:
+---------------
+
+This is an integer denoting the time when water will start flowing from the source point.
+
+### Output:
+-----------
+
+Create a file named “waterFlow.cpp” 
+Run the file:
+g++ waterFlow.cpp –o waterFlow.o
+./waterFlow.o –i inputFile
