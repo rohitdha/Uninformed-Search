@@ -1,4 +1,4 @@
-##<u>UNINFORMED SEARCH</u>
+##<u>UNINFORMED SEARCH PROJECT</u>
 --------------------------
 
 
@@ -29,7 +29,7 @@ Given a text input file. First line of this file represents the number of test c
 ### Task:
 ---------
 
-This field indicates which algorithm you are going to use to solve the problem. The input is either “BFS”, “DFS” or “UCS” (without the double quotes)
+This field indicates which algorithm you are going to use to solve the problem. The input is either <b>“BFS”, “DFS” or “UCS”</b> (without the double quotes)
 
 ### Source:
 -----------
@@ -67,7 +67,7 @@ This is an integer denoting the time when water will start flowing from the sour
 ### Output:
 -----------
 
-Create a file named “waterFlow.cpp” 
+Create a file named <b>“waterFlow.cpp”</b> 
 Run the file:
 
 g++ waterFlow.cpp –o waterFlow.o
@@ -77,13 +77,13 @@ g++ waterFlow.cpp –o waterFlow.o
 ### Clarifications:
 -------------------
 
-* For BFS-DFS, whenever you want to insert nodes to your frontier, insert them in alphabetical order and then remove them according to the algorithm. Also for UCS, upon choosing a node from the frontier, in case of ties, choose the one that comes first in alphabetical order.
-* For DFS, you should not visit a node that has already been visited to avoid the infinite-loop issue.
-* For UCS, you can pop a node from the frontier only if the pipe from current node to that particular node is active at that time.
+* For <b>BFS-DFS</b>, whenever you want to insert nodes to your frontier, insert them in alphabetical order and then remove them according to the algorithm. Also for <b>UCS</b>, upon choosing a node from the frontier, in case of ties, choose the one that comes first in alphabetical order.
+* For <b>DFS</b>, you should not visit a node that has already been visited to avoid the infinite-loop issue.
+* For <b>UCS</b>, you can pop a node from the frontier only if the pipe from current node to that particular node is active at that time.
 * It’s not possible for a node to be both source and destination.
 * There will be one source node and at least one destination node. There is no bound on maximum number of destination/middle nodes and pipes.
 * Names of the nodes (source, destinations and middle nodes) are unique, case-sensitive and are all alphabetical strings. (Just uppercase letters)
 * Pipe lengths are positive integers.
-* A pipe can have multiple off-times. The off-times will be specified in 0-23 hour format. So if the time goes to 24, revert it back to 0.
+* A pipe can have multiple off-times. The <b>off-times</b> will be specified in <b>0-23 hour format</b>. So if the time goes to 24, revert it back to 0.
 * First and second numbers in pipe off-periods are both positive integers and not equal. Also the second number is always greater than the first number.
 * There may be some overlapping periods when the pipes don’t work too, i.e. a pipe can have off-periods like 2-4 and 3-7.
