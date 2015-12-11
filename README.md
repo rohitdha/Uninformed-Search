@@ -11,5 +11,17 @@ One strange fact about this city is that some of the pipes which are old do not 
 
 You have to keep track of the time too. This is simple. We assume that it takes n units of time for water to flow through a pipe if the length of the pipe is n. For example if you have two pipes with length 3 and 4 in your route till now and you have started from time 2, current time will be 2 + 3 + 4 = 9.
 
-Your task is to find a <b>route</b> based on the availability of the pipes in a given time using <b>Search Algorithms - Breadth First Search, Depth First Search, Uniform Cost Search</b>.You are given the start time that water will start flowing and then you have to report the time which water reaches the other side of the city.
+Your task is to find a route based on the availability of the pipes in a given time using <b>Search Algorithms - Breadth First Search, Depth First Search, Uniform Cost Search</b>.You are given the start time that water will start flowing and then you have to report the time which water reaches the other side of the city.
 
+### Input:
+----------
+
+Given a text input file. First line of this file represents the number of test cases. The next line will be the beginning of the 1st test case. Each test case ends with an empty line. Each test case consists of the following lines:
+
+* <task> algorithm that you are supposed to use for this case
+* <source> name of the source node
+* <destinations> names of the destination nodes
+* <middle nodes> names of the middle nodes
+* <#pipes> represents the number of pipes
+* <graph> represents start-end nodes, lengths and off-times of pipes
+* <start-time> the time when water will start flowing
