@@ -1,4 +1,4 @@
 ## UNINFORMED-SEARCH
-  ###### Breadth First Search
-  ###### Depth First Search
-  ###### Uniform Cost Search
+###### Breadth First Search
+###### Depth First Search
+###### Uniform Cost Search
