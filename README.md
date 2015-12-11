@@ -25,3 +25,33 @@ Given a text input file. First line of this file represents the number of test c
 * \<#pipes\> represents the number of pipes
 * \<graph\> represents start-end nodes, lengths and off-times of pipes
 * \<start-time\> the time when water will start flowing
+
+### Task:
+---------
+
+This field indicates which algorithm you are going to use to solve the problem. The input is either “BFS”, “DFS” or “UCS” (without the double quotes)
+There are multiple definitions for these algorithms. In this homework we ask you to use the definition in subsection 3.4 of “Artificial Intelligence, A modern Approach, 3rd edition” (starting at page 81). The reference implementation used to create the problem solutions will use these algorithms. Hence beware that using different algorithms may result in incorrect solutions.
+
+### Source:
+-----------
+
+This is the name of the source of water.
+
+### Destinations:
+-----------------
+
+This is a space separated line consisting of names of the destination (goal) nodes.
+
+### Middle-nodes:
+-----------------
+
+This is a space separated line consisting of the middle nodes, i.e. nodes that are neither source nor destination. (It may be an empty line which means there are no middle nodes.)
+
+### #Pipes:
+-----------
+
+This number represents the number of pipes in the system.
+Graph:
+This section contains #pipes number of lines. Each line in this section represents one pipe of the system. Format of each line is as following: (There is one space between each field)
+\<start\> \<end\> \<length\> \<#off-periods\> \< period1 \> …. \<periodn\>
+<b>Example: S E 10 3 10-12 15-16 25-29</b>
