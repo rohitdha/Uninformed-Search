@@ -30,7 +30,6 @@ Given a text input file. First line of this file represents the number of test c
 ---------
 
 This field indicates which algorithm you are going to use to solve the problem. The input is either “BFS”, “DFS” or “UCS” (without the double quotes)
-There are multiple definitions for these algorithms. In this homework we ask you to use the definition in subsection 3.4 of “Artificial Intelligence, A modern Approach, 3rd edition” (starting at page 81). The reference implementation used to create the problem solutions will use these algorithms. Hence beware that using different algorithms may result in incorrect solutions.
 
 ### Source:
 -----------
@@ -52,6 +51,10 @@ This is a space separated line consisting of the middle nodes, i.e. nodes that a
 
 This number represents the number of pipes in the system.
 Graph:
-This section contains #pipes number of lines. Each line in this section represents one pipe of the system. Format of each line is as following: (There is one space between each field)
+This section contains <b>#pipes</b> number of lines. Each line in this section represents one pipe of the system. Format of each line is as following: (There is one space between each field)
 \<start\> \<end\> \<length\> \<#off-periods\> \< period1 \> …. \<periodn\>
+
 <b>Example: S E 10 3 10-12 15-16 25-29</b>
+
+It means that this pipe starts from point S , ends in point E , has the length 10, and it has 3 off-periods. It is not working from time 10 to 12, 15 to 16 and 25 to 29. Period 10-12 means that if we are at time 10, 11 or 12 we cannot use this pipe as the next pipe. Some pipes may always work. In that case, the 4th field for these pipes will be 0. Please note that the pipes are unidirectional, i.e. for a pipe that has starting point A and ending point B, the water can flow from A to B only and not in the reverse direction.
+The pipe length will be 1 for both BFS and DFS (i.e. pipe length is ignored by these algorithms and is always assumed to be 1). Also, ignore the off-periods for these algorithms, i.e. when using BFS-DFS; assume that all pipes work all the time.
