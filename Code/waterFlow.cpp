@@ -426,6 +426,7 @@ string uninformedSearch::ucs(int &start_node) {
 				value_node.push_back(value);	
 				value_node.push_back(p_node);
 				// Random count variables
+				int i=0;//count variable
 				int vark=0;
 				int vard=0;
 				
