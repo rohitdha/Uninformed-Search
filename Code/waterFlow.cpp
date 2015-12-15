@@ -65,7 +65,7 @@ void uninformedSearch::setData(vector<string> & line) {
 	vector<string>::iterator graph_of_pipes_iterator;
 	int i;
 	string graph_per_line[this->pipes];
-	for(graph_of_pipes_iterator = graph_of_pipes.begin(), i=0; nn != graph_of_pipes.end(); ++graph_of_pipes_iterator,i++) {
+	for(graph_of_pipes_iterator = graph_of_pipes.begin(), i=0; graph_of_pipes_iterator != graph_of_pipes.end(); ++graph_of_pipes_iterator,i++) {
 			graph_per_line[i] = *graph_of_pipes_iterator;
 			int j=0;
 			string temp = "";
@@ -143,7 +143,7 @@ int uninformedSearch::getNumberOfNodes() {
 	// Stores Source node into var 
 	while(source[i]) {
 		if((isspace(source[i]))) {
-			count_edge.push_back(k);
+			count_edge.push_back(var);
 			var = "";
 			i++;
 		}
@@ -258,7 +258,7 @@ string uninformedSearch::bfs(int &start_node) {
 		break;
 	}
         
-        for(int i=0; i<c; i++) {
+        for(int i=0; i<count; i++) {
 		if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
 			Q.push(i);
 			visited[i] = 1;
@@ -538,7 +538,7 @@ void uninformedSearch::adj_matrix() {
 	vector<string>::iterator vector_iterator;
 	string edge[2];
 	for(int i=0; i < pipes; i++) {
-		vector_iterator = (*vili).begin();
+		vector_iterator = (*node_list).begin();
 		edge[0] = *vector_iterator;
 		++vector_iterator;
 		edge[1] = *vector_iterator;
