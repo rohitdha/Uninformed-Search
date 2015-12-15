@@ -335,17 +335,17 @@ string uninformedSearch::ucs(int &start_node) {
     while(!Q.empty()) {
 		
 		node_path.clear();
-		vector<int> x = Q.front();
+		vector<int> front_node = Q.front();
 		//clear this vector x before processing don't forget
 		Q.pop_front();
-		vector<int>::iterator vi;
-		vi = x.begin();
-		int cost = *vi;
-		vi++;
-		int node = *vi;
+		vector<int>::iterator vector_iterator;
+		vector_iterator = front_node.begin();
+		int cost = *vector_iterator;
+		vector_iterator++;
+		int node = *vector_iterator;
 		visited[node] = 1;
 		vector<list<vector<string> > > *adj = this->getadjacency_list();
-		vector<list<vector<string> > >::iterator it;
+		vector<list<vector<string> > >::iterator vector_list_vector_iterator;
 		check_dest = this->checkDestination(MapNumberToNode[node]);
 		if( check_dest == 1) {
 			string answer = MapNumberToNode[node] + " ";
@@ -357,49 +357,49 @@ string uninformedSearch::ucs(int &start_node) {
 			break;
 		}
 		for(int i = 0; i < node; i++) {
-				adj++;
+			adj++;
 		}
 		int noset =0;
-		for(it = (*adj).begin(); it != (*adj).end(); it++) {
-			list<vector<string> > it2=*it;
-			list<vector<string> >::iterator iter=it2.begin();
+		for(vector_list_vector_iterator = (*adj).begin(); vector_list_vector_iterator != (*adj).end(); vector_list_vector_iterator++) {
+			list<vector<string> > list_vector = *vector_list_vector_iterator;
+			list<vector<string> >::iterator list_vector_string = list_vector.begin();
 			
-			while(iter!=it2.end()) {
-				vector<string> it3=*iter;
-				vector<string>::iterator iter1 = it3.begin();
-				int p_node = MapNodeToNumber[*iter1];
+			while(list_vector_string != list_vector.end()) {
+				vector<string> vector_string_1 =*list_vector_string;
+				vector<string>::iterator vector_string_2 = vector_string_1.begin();
+				int p_node = MapNodeToNumber[*vector_string_2];
 				
 				if (visited[p_node] == 1) {
 					noset = 1;
 				}
 				
-				iter1++;
-				string p_path = *iter1;
+				vector_string_2++;
+				string p_path = *vector_string_2;
 				int value = atoi(p_path.c_str());
-				++iter1;
+				++vector_string_2;
 				int dont_push= 0;
 				
-				while(iter1 != it3.end()) {
-					string check = *iter1;
+				while(vector_string_2 != vector_string_1.end()) {
+					string check = *vector_string_2;
 					int  checkin = atoi(check.c_str());
 					int start = checkin;
 					
 					if(checkin) {
-						iter1++;
+						vector_string_2++;
 						
 						while(start) {
 							
-							int t=0,v=0;
-							string ss = *iter1;
+							int t=0,v=0; // count variables
+							string var = *vector_string_2;
 							string token[2];
 							
-							while( ss[t] != '\0'){
+							while( var[t] != '\0'){
 							
-								if(ss[t] == '-') {
+								if(var[t] == '-') {
 									v++;
 									t++;
 								}
-								token[v] += ss[t]; 
+								token[v] += var[t]; 
 								t++;
 							
 							}
@@ -410,12 +410,10 @@ string uninformedSearch::ucs(int &start_node) {
 							if(token_0 <= check_val && check_val <= token_1) {
 								dont_push = 1;
 							}
-							
 							start --;
-							iter1++;
-						
+							vector_string_2++;
 						}
-					}	else {
+					} else {
 						break;
 					}
 				}
@@ -435,10 +433,10 @@ string uninformedSearch::ucs(int &start_node) {
 					list<vector<int> >::iterator it1= Q.begin();
 					
 					for(it1= Q.begin(); it1 != Q.end(); ++it1,++i) {
-						vector<int> it2=*it1;
+						vector<int> list_vector=*it1;
 						vector<int>::iterator it;
-						it = find(it2.begin()+1, it2.end(), p_node);
-						if (it != it2.end()) {
+						it = find(list_vector.begin()+1, list_vector.end(), p_node);
+						if (it != list_vector.end()) {
 							k =1;
 							break;
 						}
@@ -451,19 +449,19 @@ string uninformedSearch::ucs(int &start_node) {
 							it1++;
 						}
 					
-						vector<int> it2=*it1;
-						vector<int>::iterator iter=it2.begin();
+						vector<int> list_vector=*it1;
+						vector<int>::iterator list_vector_string=list_vector.begin();
 					
-						if((*iter) >= value) {
+						if((*list_vector_string) >= value) {
 							it1 = Q.erase(it1);
 							Q.insert(it1,vil);
 							d =1;
 						} else {
-							test[p_node] = *iter;
+							test[p_node] = *list_vector_string;
 						}
 					
-						while(iter!=it2.end()) {
-							++iter;
+						while(list_vector_string!=list_vector.end()) {
+							++list_vector_string;
 						}
 					}
 				}
@@ -472,11 +470,11 @@ string uninformedSearch::ucs(int &start_node) {
 					Q.push_back(vil);
 				}
 				vil.clear();
-				iter++;
+				list_vector_string++;
 			}
 			noset = 0;
 		}
-		x.clear();
+		front_node.clear();
 		Q.sort();
 	}
 	if(!check_dest) {
