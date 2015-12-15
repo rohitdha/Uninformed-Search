@@ -422,54 +422,54 @@ string uninformedSearch::ucs(int &start_node) {
 				if(!dont_push)
 					test[p_node] = value;
 				
-				vector<int> vil;
-				vil.push_back(value);	
-				vil.push_back(p_node);
-				int i=0;
-				int k=0;
-				int d=0;
+				vector<int> value_node;
+				value_node.push_back(value);	
+				value_node.push_back(p_node);
+				// Random count variables
+				int vark=0;
+				int vard=0;
 				
 				if(!dont_push) {			
-					list<vector<int> >::iterator it1= Q.begin();
+					list<vector<int> >::iterator list_vector_1 = Q.begin();
 					
-					for(it1= Q.begin(); it1 != Q.end(); ++it1,++i) {
-						vector<int> list_vector=*it1;
-						vector<int>::iterator it;
-						it = find(list_vector.begin()+1, list_vector.end(), p_node);
-						if (it != list_vector.end()) {
-							k =1;
+					for(list_vector_1 = Q.begin(); list_vector_1 != Q.end(); ++list_vector_1,++i) {
+						vector<int> list_vector=*list_vector_1;
+						vector<int>::iterator vector_int_iterator;
+						vector_int_iterator = find(list_vector.begin()+1, list_vector.end(), p_node);
+						if (vector_int_iterator != list_vector.end()) {
+							vark = 1;
 							break;
 						}
 					}
 				
-					if( k==1 ) {
-						it1= Q.begin();
+					if( vark == 1 ) {
+						list_vector_1 = Q.begin();
 
 						for(int j = 0; j < i; j++) {
-							it1++;
+							list_vector_1++;
 						}
 					
-						vector<int> list_vector=*it1;
-						vector<int>::iterator list_vector_string=list_vector.begin();
+						vector<int> list_vector = *list_vector_1;
+						vector<int>::iterator list_vector_string = list_vector.begin();
 					
 						if((*list_vector_string) >= value) {
-							it1 = Q.erase(it1);
-							Q.insert(it1,vil);
-							d =1;
+							list_vector_1 = Q.erase(list_vector_1);
+							Q.insert(list_vector_1,value_node);
+							vard = 1;
 						} else {
 							test[p_node] = *list_vector_string;
 						}
 					
-						while(list_vector_string!=list_vector.end()) {
+						while(list_vector_string != list_vector.end()) {
 							++list_vector_string;
 						}
 					}
 				}
 				
-				if(dont_push == 0 && k == 0 && noset == 0) {
-					Q.push_back(vil);
+				if(dont_push == 0 && vark == 0 && noset == 0) {
+					Q.push_back(value_node);
 				}
-				vil.clear();
+				value_node.clear();
 				list_vector_string++;
 			}
 			noset = 0;
