@@ -187,11 +187,11 @@ int uninformedSearch::getNumberOfNodes() {
 		s++;++in;
 	}
 	
-    for(int i=0; i<count_edge.size();i++) {
+    	for(int i=0; i<count_edge.size();i++) {
 		this->MapNodeToNumber[count_edge[i]] = i;
 	}	
 	
-    for(int i=0; i<count_edge.size();i++) {
+    	for(int i=0; i<count_edge.size();i++) {
 		this->MapNumberToNode[i] = count_edge[i];
 	}
 	
@@ -237,37 +237,41 @@ string uninformedSearch::bfs(int &start_node) {
     Q.push(start_node);
     int inside=0;
     int check_dest =0;
-	map<int,int> test;
-	test[start_node] = path_cost;
-    while(!Q.empty())
-    {
+    map<int,int> test;
+    test[start_node] = path_cost;
+    
+    while(!Q.empty()) {
+    	
         int x=Q.front();
         Q.pop(); // pop here. we have x now
-
-		check_dest = this->checkDestination(MapNumberToNode[x]);
-		if( check_dest == 1) {
-			string answer = MapNumberToNode[x] + " ";
-			stringstream ss;
-			ss << test[x]%24;
-			answer += ss.str();
-			return answer;
-			break;
-		}
-        for(int i=0; i<c; i++) {
-			if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
-				Q.push(i);
-				visited[i] = 1;
-				test[i] = test[x] + 1;
-			}
-		}
-    }
-	if(!check_dest) {
-		return "None";
+	check_dest = this->checkDestination(MapNumberToNode[x]);
+	
+	if( check_dest == 1) {
+		string answer = MapNumberToNode[x] + " ";
+		stringstream ss;
+		ss << test[x]%24;
+		answer += ss.str();
+		return answer;
+		break;
 	}
+        
+        for(int i=0; i<c; i++) {
+		if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
+			Q.push(i);
+			visited[i] = 1;
+			test[i] = test[x] + 1;
+		}
+	}
+    }
+    
+    if(!check_dest) {
+	return "None";
+    }
 }
 
 // Depth First Search Algorithm
 string uninformedSearch::dfs(int &start_node) {
+    
     int c = this->totalEdges;
     string destination = this->getDestination();
     int path_cost = this->startTime;
@@ -276,57 +280,56 @@ string uninformedSearch::dfs(int &start_node) {
     visited[start_node]=1;
     S.push(start_node);
     int inside = 0;
-	int j=0;
+    int j=0;
     int check_dest =0;
     map<int,int> test;
-  	test[start_node] = path_cost;
-    while(!S.empty())
-    {
+    test[start_node] = path_cost;
+    
+    while(!S.empty()) {
+        
         int x = S.top();
         S.pop(); // pop here. we have x now
-		visited[x] = 1;
-		check_dest = this->checkDestination(MapNumberToNode[x]);
-		if( check_dest == 1) {
-			//cout << MapNumberToNode[x] << " " << path_cost<< endl;
-			string answer = MapNumberToNode[x] + " ";
-			stringstream ss;
-			ss << test[x]%24;
-			answer += ss.str();
-			return answer;
-		}
-		for(int i=c-1; i>=0; i--) {
-			if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
-				S.push(i);
-				//visited[i] = 1;
-                test[i] = test[x] + 1;
-			}
-		}
-		path_cost += 1;
-    }
-	if(!check_dest) {
-	    return "None";
+	visited[x] = 1;
+	check_dest = this->checkDestination(MapNumberToNode[x]);
+	
+	if( check_dest == 1) {
+		string answer = MapNumberToNode[x] + " ";
+		stringstream ss;
+		ss << test[x]%24;
+		answer += ss.str();
+		return answer;
 	}
+	
+	for(int i=c-1; i>=0; i--) {
+		if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
+			S.push(i);
+                	test[i] = test[x] + 1;
+		}
+	}
+	path_cost += 1;
+	
+    }
+
+    if(!check_dest) {
+    	return "None";
+    }
 }
 
 // Uniform Cost Search Algorithm
 string uninformedSearch::ucs(int &start_node) {
-    int c = this->totalEdges;
     
-	int path_cost = this->startTime;
+    int c = this->totalEdges;
+    int path_cost = this->startTime;
     int *visited=(int *)calloc(c,sizeof(int));
-	
-	list<vector<int > > Q;
-	
-	map<int,int> test;
-	vector<int> node_path;
-	
-	test[start_node] = path_cost;
-	
-	node_path.push_back(path_cost);
-	node_path.push_back(start_node);
-	Q.push_back(node_path);
-	int check_dest =0;
-	while(!Q.empty()) {
+    list<vector<int > > Q;
+    map<int,int> test;
+    vector<int> node_path;
+    test[start_node] = path_cost;
+    node_path.push_back(path_cost);
+    node_path.push_back(start_node);
+    Q.push_back(node_path);
+    int check_dest =0;
+    while(!Q.empty()) {
 		
 		node_path.clear();
 		vector<int> x = Q.front();
@@ -622,7 +625,7 @@ int main(int argc, char **argv) {
 		if(mystr.empty() && j >3) {
 			i++;
 			j=0;
-            if(i == no_of_tasks) break;				
+        	if(i == no_of_tasks) break;				
 			getline(file,mystr);
 		}
 		line[i].push_back(mystr);
