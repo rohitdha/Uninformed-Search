@@ -489,20 +489,19 @@ string uninformedSearch::ucs(int &start_node) {
 void uninformedSearch::adj_list() {
 	int count = this->getNumberOfNodes();
 	int dummyCount = 0;	
-	vector<string> *vili = this->getListOfNodes();
+	vector<string> *node_list = this->getListOfNodes();
 	int pipes = this->getPipes();
-	vector<string>::iterator nn;
+	vector<string>::iterator vector_iterator;
 	
 	string edge[2];
 	vector<string> store_pipes[this->pipes];
 	list<vector<string> > list_pipes[this->pipes];
 	this->adjList = new vector<list<vector<string> > >[count];
-	int n;
 	for(int i = 0; i < pipes; i++) {
-		nn = (*vili).begin();
-		edge[0] = *nn;
-		++nn;
-		edge[1] = *nn;
+		vector_iterator = (*node_list).begin();
+		edge[0] = *vector_iterator;
+		++vector_iterator;
+		edge[1] = *vector_iterator;
 		
 		vector<string> test = this->nodesInfo;
 		vector<string>::iterator testing;
@@ -512,39 +511,39 @@ void uninformedSearch::adj_list() {
 		if(testing != test.end() && testing1 != test.end()) {
 			
 		} else {
-			vili++;
+			node_list++;
 			continue;
 		}
 		
-		int m =  MapNodeToNumber[edge[0]];
-		while( nn != (*vili).end() ) {
-			store_pipes[i].push_back(*nn);
-			++nn;
+		int node =  MapNodeToNumber[edge[0]];
+		while( vector_iterator != (*node_list).end() ) {
+			store_pipes[i].push_back(*vector_iterator);
+			++vector_iterator;
 		}
 		list_pipes[i].push_back(store_pipes[i]);
-		this->adjList[m].push_back(list_pipes[i]);
-		sort(this->adjList[m].begin(),this->adjList[m].end());
-		vili++;
+		this->adjList[node].push_back(list_pipes[i]);
+		sort(this->adjList[node].begin(),this->adjList[node].end());
+		node_list++;
 	}
 }
 
 // Implentation of Adjacency Matrix 
 void uninformedSearch::adj_matrix() {
 	int count = this->getNumberOfNodes();
-	map<string,int>::iterator it;
 	this->adjMatrix = (int **) calloc(count, sizeof(int *));
+	
 	for(unsigned int i = 0; i < count; i++)
 		this->adjMatrix[i] = (int *) calloc(count, sizeof(int));
 		
-	vector<string> *vili = this->getListOfNodes();
+	vector<string> *node_list = this->getListOfNodes();
 	int pipes = this->getPipes();
-	vector<string>::iterator nn;
+	vector<string>::iterator vector_iterator;
 	string edge[2];
 	for(int i=0; i < pipes; i++) {
-		nn = (*vili).begin();
-		edge[0] = *nn;
-		++nn;
-		edge[1] = *nn;
+		vector_iterator = (*vili).begin();
+		edge[0] = *vector_iterator;
+		++vector_iterator;
+		edge[1] = *vector_iterator;
 		
 		vector<string> test = this->nodesInfo;
 		vector<string>::iterator testing;
@@ -554,12 +553,12 @@ void uninformedSearch::adj_matrix() {
 		if(testing != test.end() && testing1 != test.end()) {
 			
 		} else {
-			vili++;
+			node_list++;
 			continue;
 		}
 		
 		adjMatrix[MapNodeToNumber[edge[0]]][MapNodeToNumber[edge[1]]] = 1;
-		vili++;
+		node_list++;
 	}
 }
 
