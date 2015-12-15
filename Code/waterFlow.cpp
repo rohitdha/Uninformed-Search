@@ -347,7 +347,7 @@ string uninformedSearch::ucs(int &start_node) {
 		if( check_dest == 1) {
 			string answer = MapNumberToNode[node] + " ";
 			stringstream ss;
-            cost = cost%24;
+            		cost = cost%24;
 			ss << cost;
 			answer += ss.str();
 			return answer;
