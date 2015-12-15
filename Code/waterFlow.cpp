@@ -246,7 +246,6 @@ string uninformedSearch::bfs(int &start_node) {
 
 		check_dest = this->checkDestination(MapNumberToNode[x]);
 		if( check_dest == 1) {
-			//cout<< MapNumberToNode[x] <<" "<< test[x] << endl;
 			string answer = MapNumberToNode[x] + " ";
 			stringstream ss;
 			ss << test[x]%24;
@@ -356,18 +355,16 @@ string uninformedSearch::ucs(int &start_node) {
 		}
 		int noset =0;
 		for(it = (*adj).begin(); it != (*adj).end(); it++) {
-			
 			list<vector<string> > it2=*it;
 			list<vector<string> >::iterator iter=it2.begin();
 			
 			while(iter!=it2.end()) {
-				
 				vector<string> it3=*iter;
 				vector<string>::iterator iter1 = it3.begin();
 				int p_node = MapNodeToNumber[*iter1];
+				
 				if (visited[p_node] == 1) {
 					noset = 1;
-				
 				}
 				
 				iter1++;
@@ -412,14 +409,10 @@ string uninformedSearch::ucs(int &start_node) {
 							iter1++;
 						
 						}
-					
 					}	else {
-					
 						break;
-					
 					}
 				}
-			
 				value = test[node] + value;
 				
 				if(!dont_push)
@@ -433,7 +426,6 @@ string uninformedSearch::ucs(int &start_node) {
 				int d=0;
 				
 				if(!dont_push) {			
-			
 					list<vector<int> >::iterator it1= Q.begin();
 					
 					for(it1= Q.begin(); it1 != Q.end(); ++it1,++i) {
@@ -447,9 +439,8 @@ string uninformedSearch::ucs(int &start_node) {
 					}
 				
 					if( k==1 ) {
-					
 						it1= Q.begin();
-					
+
 						for(int j = 0; j < i; j++) {
 							it1++;
 						}
@@ -462,7 +453,7 @@ string uninformedSearch::ucs(int &start_node) {
 							Q.insert(it1,vil);
 							d =1;
 						} else {
-						test[p_node] = *iter;
+							test[p_node] = *iter;
 						}
 					
 						while(iter!=it2.end()) {
@@ -614,7 +605,7 @@ int main(int argc, char **argv) {
 	
 	// Creating output file
 	ofstream outfile;
-    outfile.open("output.txt");
+    	outfile.open("output.txt");
 	
 	getline(file,mystr);
 	
