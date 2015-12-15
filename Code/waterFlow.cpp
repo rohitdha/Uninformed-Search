@@ -44,29 +44,29 @@ uninformedSearch::uninformedSearch() {
 
 // Reading the data from input vector and storing into class variables
 void uninformedSearch::setData(vector<string> & line) {
-	vector<string>::iterator it;
-	it = line.begin();
-	this->task = *it;
-	it++;
-	this->source = *it;
-	it++;
-	this->destination = *it;
-	it++;
-	this->middlenodes = *it;
-	it++;
-	this->pipes = atoi((*it).c_str());
-	it++;
-	for(int i=0; i<this->pipes; i++,it++) {
-		this->graphOfPipes.push_back(*it);
+	vector<string>::iterator read_it;
+	read_it = line.begin();
+	this->task = *read_it;
+	read_it++;
+	this->source = *read_it;
+	read_it++;
+	this->destination = *read_it;
+	read_it++;
+	this->middlenodes = *read_it;
+	read_it++;
+	this->pipes = atoi((*read_it).c_str());
+	read_it++;
+	for(int i=0; i<this->pipes; i++,read_it++) {
+		this->graphOfPipes.push_back(*read_it);
 	}
 	this->individualPipes = new vector<string>[this->pipes];
 	
-	vector<string> ss = this->getGraphs();
-	vector<string>::iterator nn;
+	vector<string> graph_of_pipes = this->getGraphs();
+	vector<string>::iterator graph_of_pipes_iterator;
 	int i;
 	string graph_per_line[this->pipes];
-	for(nn = ss.begin(), i=0; nn != ss.end(); ++nn,i++) {
-			graph_per_line[i] = *nn;
+	for(graph_of_pipes_iterator = graph_of_pipes.begin(), i=0; nn != graph_of_pipes.end(); ++graph_of_pipes_iterator,i++) {
+			graph_per_line[i] = *graph_of_pipes_iterator;
 			int j=0;
 			string temp = "";
 			while(graph_per_line[i][j]) { 
@@ -81,7 +81,7 @@ void uninformedSearch::setData(vector<string> & line) {
 			this->individualPipes[i].push_back(temp);
 	}
 	
-	this->startTime = atoi((*it).c_str());
+	this->startTime = atoi((*read_it).c_str());
 }
 
 // "Task" getter function
@@ -116,12 +116,12 @@ int uninformedSearch::getPipes() {
 
 // Returns the list of adjacent nodes
 vector<string>* uninformedSearch::getListOfNodes() {
-		return this->individualPipes;
+	return this->individualPipes;
 }
 
 // Returns the created adjacency list
 vector<list<vector<string> > >* uninformedSearch::getadjacency_list() {
-		return this->adjList;
+	return this->adjList;
 }
 
 //Destructor
@@ -135,49 +135,53 @@ int uninformedSearch::getNumberOfNodes() {
 	string source = this->getSource();
 	string destination = this->getDestination();
 	string middlenodes = this->getMiddleNodes();
-	int i=0;
+	int i=0; // A count variable
 	// vector that counts the number of nodes in the graph and stores all the nodes
 	vector<string> count_edge;
-	string k="";
+	string var=""; 
 	
+	// Stores Source node into var 
 	while(source[i]) {
 		if((isspace(source[i]))) {
 			count_edge.push_back(k);
-			k = "";
+			var = "";
 			i++;
 		}
-		k += source[i];
+		var += source[i];
 		i++;
 	}
-	count_edge.push_back(k);
+	count_edge.push_back(var);
 	i=0;
-	k="";
+	var="";
 	
+	// Stores list of Destination nodes into var
 	while(destination[i]) {
 		if(isspace(destination[i])) {
-			count_edge.push_back(k);
-			k = "";
+			count_edge.push_back(var);
+			var = "";
 			i++;
 		}
-		k += destination[i];
+		var += destination[i];
 		i++;
 	}
-	count_edge.push_back(k);	
+	count_edge.push_back(var);	
 	
 	i=0;
-	k="";
+	var="";
 	
+	//Stores list of Middle nodes into var
 	while(middlenodes[i]) {
 		if(isspace(middlenodes[i])) {
-			count_edge.push_back(k);
-			k = "";
+			count_edge.push_back(var);
+			var = "";
 			i++;
 		}
-		k += middlenodes[i];
+		var += middlenodes[i];
 		i++;
 	}
-	count_edge.push_back(k);
+	count_edge.push_back(var);
 	
+	// Sorting the Nodes in the graph in Alphabetical order
 	std::sort ( count_edge.begin(), count_edge.end() );
 	
 	int s = 0;
@@ -194,8 +198,6 @@ int uninformedSearch::getNumberOfNodes() {
     	for(int i=0; i<count_edge.size();i++) {
 		this->MapNumberToNode[i] = count_edge[i];
 	}
-	
-	
 	this->totalEdges = count_edge.size();
 
 	return count_edge.size();
@@ -205,20 +207,22 @@ int uninformedSearch::getNumberOfNodes() {
 int uninformedSearch::checkDestination(string &test) {
 	int i=0;
 	vector<string> dest;
-	string k="";
+	string var="";
+	// Fetching complete list of destination nodes into vector "dest" .
 	while(destination[i]) {
 		if(isspace(destination[i])) {
-			dest.push_back(k);
-			k = "";
+			dest.push_back(var);
+			var = "";
 			i++;
 		}
-		k += destination[i];
+		var += destination[i];
 		i++;
 	}
-	dest.push_back(k);
-	vector<string>::iterator in;
-	in = find (dest.begin(), dest.end(), test);
-	if (in != dest.end()) {
+	dest.push_back(var);
+	
+	vector<string>::iterator goal_node;
+	goal_node = find (dest.begin(), dest.end(), test);
+	if (goal_node != dest.end()) {
 		return 1;
 	} else {
 		return 0;
@@ -228,10 +232,10 @@ int uninformedSearch::checkDestination(string &test) {
 // Breadth First Search Algorithm
 string uninformedSearch::bfs(int &start_node) {
 	
-    int c = this->totalEdges;
+    int count = this->totalEdges;
     string destination = this->getDestination();
     int path_cost = this->startTime;
-    int *visited=(int *)calloc(c,sizeof(int));
+    int *visited=(int *)calloc(count,sizeof(int));
     queue<int> Q;
     visited[start_node]=1;
     Q.push(start_node);
@@ -241,16 +245,15 @@ string uninformedSearch::bfs(int &start_node) {
     test[start_node] = path_cost;
     
     while(!Q.empty()) {
-    	
         int x=Q.front();
         Q.pop(); // pop here. we have x now
 	check_dest = this->checkDestination(MapNumberToNode[x]);
 	
 	if( check_dest == 1) {
 		string answer = MapNumberToNode[x] + " ";
-		stringstream ss;
-		ss << test[x]%24;
-		answer += ss.str();
+		stringstream answer_string;
+		answer_string << test[x]%24;
+		answer += answer_string.str();
 		return answer;
 		break;
 	}
@@ -272,10 +275,10 @@ string uninformedSearch::bfs(int &start_node) {
 // Depth First Search Algorithm
 string uninformedSearch::dfs(int &start_node) {
     
-    int c = this->totalEdges;
+    int count = this->totalEdges;
     string destination = this->getDestination();
     int path_cost = this->startTime;
-    int *visited=(int *)calloc(c,sizeof(int));
+    int *visited=(int *)calloc(count,sizeof(int));
     stack<int> S;
     visited[start_node]=1;
     S.push(start_node);
@@ -294,13 +297,13 @@ string uninformedSearch::dfs(int &start_node) {
 	
 	if( check_dest == 1) {
 		string answer = MapNumberToNode[x] + " ";
-		stringstream ss;
-		ss << test[x]%24;
-		answer += ss.str();
+		stringstream answer_string;
+		answer_string << test[x]%24;
+		answer += answer_string.str();
 		return answer;
 	}
 	
-	for(int i=c-1; i>=0; i--) {
+	for(int i=count-1; i>=0; i--) {
 		if((this->adjMatrix[x][i] == 1) && visited[i] != 1) {
 			S.push(i);
                 	test[i] = test[x] + 1;
@@ -318,9 +321,9 @@ string uninformedSearch::dfs(int &start_node) {
 // Uniform Cost Search Algorithm
 string uninformedSearch::ucs(int &start_node) {
     
-    int c = this->totalEdges;
+    int count = this->totalEdges;
     int path_cost = this->startTime;
-    int *visited=(int *)calloc(c,sizeof(int));
+    int *visited=(int *)calloc(count,sizeof(int));
     list<vector<int > > Q;
     map<int,int> test;
     vector<int> node_path;
