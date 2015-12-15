@@ -9,10 +9,10 @@
 		1							< Number of Test Cases >
 		DFS							< Algorithm to run >
 		A							< Start Node >
-		B C D						< Destination Node >
-		E B F G H I					< Middle Nodes >
+		B C D						        < Destination Node >
+		E B F G H I					        < Middle Nodes >
 		6							< Number of pipes >
-		A B 12 0					< Adjoining Nodes, Pipe length, off time, offtime slots(one or many) >
+		A B 12 0					        < Adjoining Nodes, Pipe length, off time, offtime slots(one or many) >
 		A C 3 3 2-4 1-5 9-10
 		A D 1 0
 		A E 3 3 2-4 1-5 9-10
@@ -349,10 +349,10 @@ string uninformedSearch::ucs(int &start_node) {
 		check_dest = this->checkDestination(MapNumberToNode[node]);
 		if( check_dest == 1) {
 			string answer = MapNumberToNode[node] + " ";
-			stringstream ss;
+			stringstream answer_string;
             		cost = cost%24;
-			ss << cost;
-			answer += ss.str();
+			answer_string << cost;
+			answer += answer_string.str();
 			return answer;
 			break;
 		}
